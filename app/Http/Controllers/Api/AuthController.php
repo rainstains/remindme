@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Hash;
 
 class AuthController extends Controller
 {
@@ -15,7 +17,8 @@ class AuthController extends Controller
 
       if(!$token=auth()->attempt($credential)){
         return response()->json([
-          'success' => false
+          'success' => false,
+          'message' => 'Invalid Credential'
         ]);
       }
       return response()->json([
@@ -27,7 +30,7 @@ class AuthController extends Controller
 
     public function signUp(Request $request){
 
-        $passProtector =
+        $passProtector = Hash::make($request->password);
 
         $user = new User;
 
@@ -40,9 +43,25 @@ class AuthController extends Controller
         } catch (Exception $e) {
           return response()->json([
             'success' => false,
-            'message' => $e
+            'message' => ' '.$e
           ]);
         }
+
+    }
+
+    public function signOut(Request $request){
+      try {
+        JWTAuth::invalidate(JWTAuth::parseToken($request->token));
+        return response()->json([
+          'success' => true,
+          'message' => 'logout success'
+        ]);
+      } catch (Exception $e) {
+        return response()->json([
+          'success' => false,
+          'message' => ' '.$e
+        ]);
+      }
 
     }
 }

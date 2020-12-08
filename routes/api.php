@@ -15,3 +15,4 @@ use Illuminate\Http\Request;
 
 Route::post('signin','Api\AuthController@signIn');
 Route::post('signup','Api\AuthController@signUp');
+Route::get('signout','Api\AuthController@signOut');
