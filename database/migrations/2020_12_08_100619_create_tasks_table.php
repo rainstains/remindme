@@ -21,8 +21,9 @@ class CreateTasksTable extends Migration
             $table->DateTime('task_reminder');
             $table->Integer('task_priority');
             $table->Integer('task_difficulty');
-            $table->string('task_state')->default("OnGoing");
-            $table->foreign('users_id')->references("id")->on('users')->onDelete('cascade');
+            $table->string('task_state')->default('OnGoing');
+            $table->BigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
