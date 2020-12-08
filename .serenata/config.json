@@ -1,0 +1,11 @@
+{
+    "uris": [
+        "file://D:\\KULIAH\\SMT 5\\Mobile Gaming\\PolresTubes\\API\\remindme"
+    ],
+    "indexDatabaseUri": "file://C:\\Users\\muham\\AppData\\Roaming\\php-ide-serenata\\index-3038f526ab0e944980fe2221bf4f4e02.sqlite",
+    "phpVersion": 7.3,
+    "excludedPathExpressions": [],
+    "fileExtensions": [
+        "php"
+    ]
+}
