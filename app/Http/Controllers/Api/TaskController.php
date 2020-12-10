@@ -44,10 +44,10 @@ class TaskController extends Controller
       ]);
     }
       //read all data with Finnish state
-      public function getFinnishTasks(){
-        $tasks = Task::all()->where('task_state','=','Finnish');
+      public function getFinnishTasks(Request $request){
+        $tasks = Task::all()->where(['user_id','=',$request->user_id],['task_state','=','Finnish']);
         $countTasks = count($tasks);
-        
+
         if ($tasks == null) {
           return response()->json([
             'success' => false,
@@ -66,7 +66,7 @@ class TaskController extends Controller
         $diffculty_state = str_replace('"', "'", $request->difficulty);
         $date_state = str_replace('"', "'", $request->date);
 
-        $tasks = Task::where('task_state','=','OnGoing')
+        $tasks = Task::where(['user_id','=',$request->user_id],['task_state','=','OnGoing'])
         ->orderBy('task_priority', $priority_state)
         ->orderBy('task_difficulty', $diffculty_state)
         ->orderBy('task_duedate', $date_state)
